@@ -1,0 +1,50 @@
+#include <PIC18F4550.h>
+
+int main()
+{
+    int i;                   // Declare variable i
+    LATB = 0;                // Initialize LATB (Latch B) register to 0
+    TRISB = 0;               // Set TRISB (Tri-state B) register to 0 to configure Port B as an output port
+    
+    int arr[5] = {1, 2, 3, 4, 5};     // Declare and initialize an integer array arr with 5 elements
+    int arr1[5] = {0, 0, 0, 0, 0};    // Declare and initialize an integer array arr1 with 5 elements
+    
+    for (i = 0; i < 5; i++)  // Loop through the array
+    {
+        arr1[i] = arr[i];   // Assign each element of arr to arr1
+    }
+    
+    return 0;                // Return 0 to indicate successful program execution
+}
+
+
+
+
+Here's a breakdown of each line:
+
+#include <PIC18F4550.h>: This line includes the necessary header file for the PIC18F4550 microcontroller.
+
+int main(): The main function is the entry point of the program. It returns an integer value.
+
+int i;: An integer variable i is declared.
+
+LATB = 0;: The LATB (Latch B) register is set to 0, ensuring that all output pins of Port B are initially low.
+
+TRISB = 0;: The TRISB (Tri-state B) register is set to 0, configuring Port B as an output port.
+
+int arr[5] = {1, 2, 3, 4, 5};: An integer array arr is declared and initialized with 5 elements: 1, 2, 3, 4, and 5.
+
+int arr1[5] = {0, 0, 0, 0, 0};: An integer array arr1 is declared and initialized with 5 elements, all set to 0.
+
+for (i = 0; i < 5; i++): A for loop is used to iterate over the elements of the array. The loop runs from 0 to 4.
+
+arr1[i] = arr[i];: Within the loop, each element of the arr array is assigned to the corresponding element in the arr1 array.
+
+return 0;: The main function returns 0 to indicate successful program execution.
+
+The purpose of this code is to copy the elements of the arr array into the arr1 array. It initializes the Port B settings, declares two arrays, and uses a for loop to iterate through each element of arr and assign it to the corresponding element in arr1.
+
+
+
+
+

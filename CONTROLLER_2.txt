@@ -1,0 +1,53 @@
+#include <PIC18F4550.h>
+
+int main()
+{
+    int i, sum;              // Declare variables i and sum
+    LATB = 0;                // Initialize LATB (Latch B) register to 0
+    TRISB = 0;               // Set TRISB (Tri-state B) register to 0 to configure Port B as an output port
+    sum = 0;                 // Initialize sum variable to 0
+    int arr[5] = {1, 2, 3, 4, 5};  // Declare and initialize an integer array with 5 elements
+    
+    for (i = 0; i < 5; i++)  // Loop through the array
+    {
+        sum = sum + arr[i];  // Add each element of the array to the sum
+    }
+    
+    PORTB = sum;             // Write the value of sum to PORTB (Port B) register
+    
+    return 0;                // Return 0 to indicate successful program execution
+}
+
+
+
+
+Here's a breakdown of each line:
+
+#include <PIC18F4550.h>: This line includes the necessary header file for the PIC18F4550 microcontroller.
+
+int main(): The main function is the entry point of the program. It returns an integer value.
+
+int i, sum;: Two integer variables i and sum are declared.
+
+LATB = 0;: The LATB (Latch B) register is set to 0, ensuring that all output pins of Port B are initially low.
+
+TRISB = 0;: The TRISB (Tri-state B) register is set to 0, configuring Port B as an output port.
+
+sum = 0;: The sum variable is initialized to 0.
+
+int arr[5] = {1, 2, 3, 4, 5};: An integer array arr is declared and initialized with 5 elements: 1, 2, 3, 4, and 5.
+
+for (i = 0; i < 5; i++): A for loop is used to iterate over the elements of the array. The loop runs from 0 to 4.
+
+sum = sum + arr[i];: Within the loop, each element of the array is added to the sum variable.
+
+PORTB = sum;: The value of sum is written to the PORTB (Port B) register, which sets the output pins of Port B accordingly.
+
+return 0;: The main function returns 0 to indicate successful program execution.
+
+The purpose of this code is to calculate the sum of the elements in the arr array and display the result on Port B. Each element of the array is added to the sum variable using a for loop, and the final sum is written to the PORTB register.
+
+
+
+
+

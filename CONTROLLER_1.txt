@@ -1,0 +1,46 @@
+
+#include <PIC18F4550.h>
+
+void main()
+{
+    unsigned int a = 8, b = 3, c = 0;  // Declare and initialize variables a, b, and c
+
+    LATB = 0;  // Initialize LATB (Latch B) register to 0
+    TRISB = 0; // Set TRISB (Tri-state B) register to 0 to configure Port B as an output port
+
+    c = a + b; // Add variables a and b and store the result in c
+
+    PORTB = c; // Write the value of c to PORTB (Port B) register
+    PORTC = a; // Write the value of a to PORTC (Port C) register
+    PORTD = b; // Write the value of b to PORTD (Port D) register
+}
+
+
+
+
+
+The code is written for the PIC18F4550 microcontroller. Here's a breakdown of each line:
+
+#include <PIC18F4550.h>: This line includes the necessary header file for the PIC18F4550 microcontroller.
+
+void main(): The main function is the entry point of the program.
+
+unsigned int a = 8, b = 3, c = 0;: Three unsigned integer variables a, b, and c are declared and initialized with values 8, 3, and 0 respectively.
+
+LATB = 0;: The LATB (Latch B) register is set to 0, ensuring that all output pins of Port B are initially low.
+
+TRISB = 0;: The TRISB (Tri-state B) register is set to 0, configuring Port B as an output port.
+
+c = a + b;: The values of a and b are added together, and the result is stored in variable c.
+
+PORTB = c;: The value of c is written to the PORTB (Port B) register, which sets the output pins of Port B accordingly.
+
+PORTC = a;: The value of a is written to the PORTC (Port C) register, which sets the output pins of Port C accordingly.
+
+PORTD = b;: The value of b is written to the PORTD (Port D) register, which sets the output pins of Port D accordingly.
+
+The purpose of this code is to perform some simple calculations and display the results on the corresponding ports. The result of a + b is displayed on Port B, a is displayed on Port C, and b is displayed on Port D.
+
+
+
+

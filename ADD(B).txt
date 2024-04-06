@@ -1,0 +1,86 @@
+.input macro
+mov ah, 01H       ; Move 01H to AH (keyboard input)
+int 21H           ; Call interrupt 21H to read input
+ENDM
+
+.output macro
+mov ah, 02H       ; Move 02H to AH (display output)
+int 21H           ; Call interrupt 21H to display output
+ENDM
+
+.display macro var
+lea dx, var       ; Load effective address of 'var' into DX
+mov AH, 09H       ; Move 09H to AH (display string)
+int 21H           ; Call interrupt 21H to display string
+ENDM
+
+.model small
+.stack 100H
+
+.data
+m1 db 10,13, "Enter the number of Elements?:-$" ; Message 1: Prompt for number of elements
+m2 db 10,13, "Enter numbers :-$"                ; Message 2: Prompt for numbers
+m3 db 10,13 , "Addition :-$"                    ; Message 3: Display addition
+m4 db 10,13, "$"                                ; Message 4: New line
+array db 10 dup(0)                              ; Array to store input numbers
+count db 0                                      ; Counter for the number of elements
+
+.code
+mov ax, @data     ; Move data segment address to AX
+mov ds, ax        ; Move data segment address to DS
+
+lea si, array     ; Load effective address of 'array' into SI
+.display m1       ; Display prompt for number of elements
+.input            ; Read input (number of elements)
+sub al, 30H       ; Convert ASCII value to numeric value
+
+mov count, al     ; Store the number of elements in 'count'
+mov cl, count     ; Set loop counter to 'count'
+.display m4       ; Display new line
+
+S1:
+.display m2       ; Display prompt for numbers
+.input            ; Read input (numbers)
+mov [si], al      ; Store the input number in 'array'
+inc si            ; Increment SI to point to the next element
+loop S1           ; Repeat 'S1' loop 'count' times
+
+.display m4       ; Display new line
+.display m3       ; Display message for addition
+
+mov ax, 0000H     ; Initialize sum in AX to 0
+mov cl, count     ; Set loop counter to 'count'
+
+lea si, array     ; Load effective address of 'array' into SI
+s2:
+add al, [si]      ; Add the current number to AL
+sub al, 30H       ; Convert ASCII value to numeric value
+inc si            ; Increment SI to point to the next element
+loop s2           ; Repeat 's2' loop 'count' times
+
+mov ch, 02H       ; Set CH to 02H (loop counter for conversion to hexadecimal)
+mov cl, 04H       ; Set CL to 04H (loop counter for 4-bit groups)
+mov bl, al        ; Move the sum to BL for conversion
+
+s3:
+rol bl, cl        ; Rotate BL left by CL bits
+mov dl, bl        ; Move the lower 4 bits of BL to DL
+and dl, 0FH       ; Mask upper 4 bits of DL
+cmp dl, 09        ; Compare DL with 9
+jbe s4            ; Jump if below or equal to 9
+add dl, 07        ; Adjust DL to convert to ASCII A-F range
+
+s4:
+add dl, 30H       ; Convert DL to ASCII
+.output           ; Display the result (converted digit)
+dec ch            ; Decrement CH
+jnz s3            ; Repeat 's3' loop until CH is zero
+
+mov ah, 4CH       ; Move 4CH to AH (terminate program)
+int 21H           ; Call interrupt 21H to terminate program
+
+end               ; End of the program
+
+
+
+;The code is an assembly program that prompts the user to enter the number of elements, reads the elements, calculates their sum, converts ;the sum to a hexadecimal value, and displays the result. The code uses macros to simplify input, output, and display operations. Comments ;have been added to explain the purpose and functionality of each section of the code.
